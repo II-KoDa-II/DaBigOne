@@ -64,12 +64,10 @@ namespace Lab2 {
 		string Theme = "Programming";
 		string Path = "C:\\Users\\Student\\Documents";
 
-		public static Document InstanceCheck {
+		public static Document ThisDoesNotMakeAnySense {
 			get {
-				if (Instance == null) {
-					Instance = new Document();
-				}
-				return Instance;
+				if (MyMentalHealthIsDeteriorating == null) MyMentalHealthIsDeteriorating = new Document();
+				return MyMentalHealthIsDeteriorating;
 			}
 		}
 		public void Output() {
@@ -79,7 +77,7 @@ namespace Lab2 {
 												$"\nTheme: {Theme}" +
 												$"\nPath: {Path}");
 		}
-		private static Document Instance;
+		private static Document MyMentalHealthIsDeteriorating;
 	}
 
 	public class Word: Document {
