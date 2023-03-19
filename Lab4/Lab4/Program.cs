@@ -16,7 +16,7 @@ using System.IO;
 
 namespace ConsoleApp1 {
   class Memento {
-    public string text { get; set; }
+    public string Text { get; set; }
   }
   public interface IOriginator {
     object GetMemento();
@@ -24,91 +24,90 @@ namespace ConsoleApp1 {
   }
 
   [Serializable]
-  public class txtFile: IOriginator {
-    public string text;
-    public string tags;
+  public class TxtFile: IOriginator {
+    public string Text;
+    public string Tags;
 
-    public txtFile() { }
+    public TxtFile() { }
 
-    public txtFile(string text, string tags) {
-      this.text = text;
-      this.tags = tags;
+    public TxtFile(string Text, string Tags) {
+      this.Text = Text;
+      this.Tags = Tags;
     }
 
     public string BinarySerialize() {
-      string FileName = "file.dat";
-      FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Write);
-      BinaryFormatter bf = new BinaryFormatter();
-      bf.Serialize(fs, this);
-      fs.Flush();
-      fs.Close();
+      string FileName = "File.dat";
+      FileStream fileStream = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Write);
+      BinaryFormatter binaryFormat = new BinaryFormatter();
+      binaryFormat.Serialize(fileStream, this);
+      fileStream.Flush();
+      fileStream.Close();
       return FileName;
     }
 
     public void BinaryDeserialize(string FileName) {
-      FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Read);
-      BinaryFormatter bf = new BinaryFormatter();
-      txtFile deserialized = (txtFile)bf.Deserialize(fs);
-      text = deserialized.text;
-      fs.Close();
+      FileStream fileStream = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Read);
+      BinaryFormatter binaryFormat = new BinaryFormatter();
+      TxtFile deserialized = (TxtFile)binaryFormat.Deserialize(fileStream);
+      Text = deserialized.Text;
+      fileStream.Close();
     }
 
-    static public string XMLSerialize(txtFile details) {
-      string FileName = "file.xml";
-      XmlSerializer serializer = new XmlSerializer(typeof(txtFile));
-      using (TextWriter writer = new StreamWriter(FileName)) {
-        serializer.Serialize(writer, details);
+    static public string XMLSerialize(TxtFile Details) {
+      string FileName = "File.xml";
+      XmlSerializer serializer = new XmlSerializer(typeof(TxtFile));
+      using (TextWriter Writer = new StreamWriter(FileName)) {
+        serializer.Serialize(Writer, Details);
       }
       return FileName;
     }
 
-    static public txtFile XMLDeserialize(string FileName) {
-      XmlSerializer deserializer = new XmlSerializer(typeof(txtFile));
+    static public TxtFile XMLDeserialize(string FileName) {
+      XmlSerializer deserializer = new XmlSerializer(typeof(TxtFile));
       TextReader reader = new StreamReader(FileName);
       object obj = deserializer.Deserialize(reader);
-      txtFile XmlData = (txtFile)obj;
+      TxtFile XmlData = (TxtFile)obj;
       reader.Close();
       return XmlData;
     }
 
     public void PrintText() {
-      Console.WriteLine(text);
+      Console.WriteLine(Text);
     }
 
     object IOriginator.GetMemento() {
-      return new Memento { text = this.text };
+      return new Memento { Text = this.Text };
     }
     void IOriginator.SetMemento(object memento) {
       if (memento is Memento) {
-        var mem = memento as Memento;
-        text = mem.text;
+        Text = (memento as Memento).Text;
       }
     }
   }
   public class Caretaker {
     private object memento;
-    public void SaveState(IOriginator originator) {
-      memento = originator.GetMemento();
+    public void SaveState(IOriginator Originator) {
+      memento = Originator.GetMemento();
     }
 
-    public void RestoreState(IOriginator originator) {
-      originator.SetMemento(memento);
+    public void RestoreState(IOriginator Originator) {
+      Originator.SetMemento(memento);
     }
   }
 
   class FileSearch {
-    public string FoundFiles = "";
-    public void Search(txtFile[] library, string Request, int numberOfFiles) {
-      for (int FileNumber = 0; FileNumber < numberOfFiles; ++FileNumber) {
-        if (library[FileNumber].tags == Request) {
-          FoundFiles += FileNumber + " ";
+    public string DetectedFiles = "";
+    public void Search(TxtFile[] Library, string Request, int NumberOfFiles) {
+      for (int FileNumber = 0; FileNumber < NumberOfFiles; ++FileNumber) {
+        if (Library[FileNumber].Tags == Request) {
+          DetectedFiles += FileNumber + " ";
         }
       }
 
-      if (FoundFiles == "") {
-        Console.WriteLine("Files not detected");
+      if (DetectedFiles == "") {
+        Console.WriteLine("\nNo files detected");
       } else {
-        Console.WriteLine("\nResult: ");
+        Console.WriteLine("\nDetected files: ");
       }
     }
   }
@@ -116,60 +115,56 @@ namespace ConsoleApp1 {
   class Program {
     static void Main(string[] args) {
 
-      const int NumberOfFiles = 10;
-      txtFile[] Library = new txtFile[NumberOfFiles];
-      txtFile file;
+      const int NumberOfFiles = 5;
+      TxtFile[] Library = new TxtFile[NumberOfFiles];
+      TxtFile File;
 
-      file = new txtFile("Text shall begin with the first file", "alpha");
-      Library[0] = file;
-      file = new txtFile("And then continue onto the second", "sigma");
-      Library[1] = file;
-      file = new txtFile("Third will keep up with the tradition", "omega");
-      Library[2] = file;
-      file = new txtFile("And so will the fourth", "kappa");
-      Library[3] = file;
-      file = new txtFile("Fifth may deviate with it's digit 5", "lambda");
-      Library[4] = file;
-      file = new txtFile("And sixth wil present _ an underscore", "kappa");
-      Library[5] = file;
-      file = new txtFile("Seventh combines 5 with the _", "omega");
-      Library[6] = file;
-      file = new txtFile("And result will manifest as 5_ in the eighth", "sigma");
-      Library[7] = file;
-      file = new txtFile("Ninth will return to the old tradition", "alpha");
-      Library[8] = file;
-      file = new txtFile("And tenth shall finish the count", "lambda");
-      Library[9] = file;
+      File = new TxtFile("texto numero uno", "alpha");
+      Library[0] = File;
+      File = new TxtFile("texto numero dos", "kappa");
+      Library[1] = File;
+      File = new TxtFile("texto numero tres", "sigma");
+      Library[2] = File;
+      File = new TxtFile("texto numero cuatro", "alpha");
+      Library[3] = File;
+      File = new TxtFile("texto numero cinco", "omega");
+      Library[4] = File;
+      File = new TxtFile("numero de texto seis", "lambda");
 
-      Console.WriteLine("Search for keywords: ");
+      Console.WriteLine("Search for files with tag");
       string Request = Convert.ToString(Console.ReadLine());
 
-      FileSearch filesearch = new FileSearch();
-      filesearch.Search(Library, Request, NumberOfFiles);
-      Console.WriteLine(filesearch.FoundFiles);
+      FileSearch FileSearch = new FileSearch();
+      FileSearch.Search(Library, Request, NumberOfFiles);
+      Console.WriteLine(FileSearch.DetectedFiles);
 
-      Console.WriteLine("Choose file to redact:");
+      Console.WriteLine("\nChoose file to redact");
       int FileNumber = Convert.ToInt32(Console.ReadLine());
 
-      Console.WriteLine("\nFile's text:");
-      Caretaker ct = new Caretaker();
-      Library[FileNumber].PrintText();
-      ct.SaveState(Library[FileNumber]);
+      string FileName = TxtFile.XMLSerialize(Library[FileNumber]);
 
-      Console.WriteLine("\nEnter new file text: ");
+      Console.WriteLine("\nFile text");
+      Caretaker Caretaker = new Caretaker();
+      Library[FileNumber].PrintText();
+      Caretaker.SaveState(Library[FileNumber]);
+
+      Console.WriteLine("\nEnter new text");
       string NewText = Convert.ToString(Console.ReadLine());
-      Library[FileNumber].text = NewText;
-      Console.WriteLine("\nSave? " +
+      Library[FileNumber].Text = NewText;
+      FileName = TxtFile.XMLSerialize(Library[FileNumber]);
+
+      Console.WriteLine("\nFile saved");
+      Library[FileNumber].PrintText();
+
+      Console.WriteLine("\nUndo changes?" +
                         "\n1 yes" +
                         "\n2 no");
-
       string SaveChoice = Convert.ToString(Console.ReadLine());
+
       if (SaveChoice == "1") {
-        Console.WriteLine("\nFile saved: ");
-        Library[FileNumber].PrintText();
-      } else {
-        ct.RestoreState(Library[FileNumber]);
-        Console.WriteLine("\nFile unchanged: ");
+        Caretaker.RestoreState(Library[FileNumber]);
+        FileName = TxtFile.XMLSerialize(Library[FileNumber]);
+        Console.WriteLine("\nFile unchanged");
         Library[FileNumber].PrintText();
       }
 
