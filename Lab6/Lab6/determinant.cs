@@ -11,57 +11,57 @@ namespace ConsoleApp2
     static double[][] MatrixCreate(int rows, int cols)
     {
       double[][] result = new double[rows][];
-      for (int i = 0; i < rows; ++i)
-        result[i] = new double[cols];
+      for (int index = 0; index < rows; ++index)
+        result[index] = new double[cols];
       return result;
     }
 
     static double[][] MatrixDuplicate(double[][] matrix)
     {
       double[][] result = MatrixCreate(matrix.Length, matrix[0].Length);
-      for (int i = 0; i < matrix.Length; ++i) 
-        for (int j = 0; j < matrix[i].Length; ++j)
-          result[i][j] = matrix[i][j];
+      for (int row = 0; row < matrix.Length; ++row) 
+        for (int column = 0; column < matrix[row].Length; ++column)
+          result[row][column] = matrix[row][column];
       return result;
     }
 
     static double[][] MatrixDecompose(double[][] matrix,
       out int[] perm, out int toggle)
     {
-      int n = matrix.Length; 
+      int MaxLength = matrix.Length; 
       double[][] result = MatrixDuplicate(matrix);
-      perm = new int[n];
-      for (int i = 0; i < n; ++i) { perm[i] = i; }
+      perm = new int[MaxLength];
+      for (int mainIndex = 0; mainIndex < MaxLength; ++mainIndex) { perm[mainIndex] = mainIndex; }
       toggle = 1;
-      for (int j = 0; j < n - 1; ++j) 
+      for (int index = 0; index < MaxLength - 1; ++index) 
       {
-        double colMax = Math.Abs(result[j][j]); 
-        int pRow = j;
-        for (int i = j + 1; i < n; ++i)
+        double colMax = Math.Abs(result[index][index]); 
+        int pRow = index;
+        for (int i = index + 1; i < MaxLength; ++i)
         {
-          if (result[i][j] > colMax)
+          if (result[i][index] > colMax)
           {
-            colMax = result[i][j];
+            colMax = result[i][index];
             pRow = i;
           }
         }
-        if (pRow != j)
+        if (pRow != index)
         {
           double[] rowPtr = result[pRow];
-          result[pRow] = result[j];
-          result[j] = rowPtr;
+          result[pRow] = result[index];
+          result[index] = rowPtr;
           int tmp = perm[pRow];
-          perm[pRow] = perm[j];
-          perm[j] = tmp;
+          perm[pRow] = perm[index];
+          perm[index] = tmp;
           toggle = -toggle; 
         }
-        if (Math.Abs(result[j][j]) < 1.0E-20)
+        if (Math.Abs(result[index][index]) < 1.0E-20)
           return null;
-        for (int i = j + 1; i < n; ++i)
+        for (int i = index + 1; i < MaxLength; ++i)
         {
-          result[i][j] /= result[j][j];
-          for (int k = j + 1; k < n; ++k)
-            result[i][k] -= result[i][j] * result[j][k];
+          result[i][index] /= result[index][index];
+          for (int k = index + 1; k < MaxLength; ++k)
+            result[i][k] -= result[i][index] * result[index][k];
         }
       }
       return result;
@@ -75,8 +75,8 @@ namespace ConsoleApp2
       if (lum == null)
         throw new Exception("Unable to compute MatrixDeterminant");
       double result = toggle;
-      for (int i = 0; i < lum.Length; ++i)
-        result *= lum[i][i];
+      for (int index = 0; index < lum.Length; ++index)
+        result *= lum[index][index];
       return result;
     }
 
