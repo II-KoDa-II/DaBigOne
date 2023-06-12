@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Logs>
+  <File Name="первый файл">
+    <Path>C:\Users\Desktop\первый файл.txt</Path>
+    <FileText>содержание первого файла</FileText>
+  </File>
+</Logs>
