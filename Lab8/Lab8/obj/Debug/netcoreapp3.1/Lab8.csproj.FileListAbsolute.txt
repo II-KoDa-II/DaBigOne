@@ -1,0 +1,15 @@
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.exe
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.deps.json
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.runtimeconfig.json
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.runtimeconfig.dev.json
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.dll
+C:\Users\Core i5\source\repos\Lab8\Lab8\bin\Debug\netcoreapp3.1\Lab8.pdb
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.csproj.AssemblyReference.cache
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\ConsoleApp3.Form1.resources
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.csproj.GenerateResource.cache
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.AssemblyInfoInputs.cache
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.AssemblyInfo.cs
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.csproj.CoreCompileInputs.cache
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.dll
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.pdb
+C:\Users\Core i5\source\repos\Lab8\Lab8\obj\Debug\netcoreapp3.1\Lab8.genruntimeconfig.cache
